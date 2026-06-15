@@ -1,19 +1,20 @@
 function orderByProps(obj, order) {
-  const result = [];
-  const addedKeys = {};
+  const addedKeys = new Set();
+const result = [];
 
-  for (let i = 0; i < order.length; i++) {
-    const key = order[i];
-    if (obj.hasOwnProperty(key)) {
-      result.push({ key, value: obj[key] });
-      addedKeys[key] = true;
-    }
+for (let i = 0; i < order.length; i++) {
+  const key = order[i];
+  if (Object.prototype.hasOwnProperty.call(obj, key) && !addedKeys.has(key)) {
+    result.push({ key, value: obj[key] });
+    addedKeys.add(key);
   }
+}
+
 
   const remainingKeys = [];
   for (const key in obj) {
-    if (obj.hasOwnProperty(key) && !addedKeys[key]) {
-      remainingKeys.push(key);
+    if (Object.hasOwnProperty.call(obj, key) && !addedKeys.has(key)) {
+    remainingKeys.push(key);
     }
   }
 
